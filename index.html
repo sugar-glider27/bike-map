@@ -15,10 +15,25 @@
     <script src="map.js" type="module"></script>
   </head>
   <body>
-    <h1>🚴🏼‍♀️ Bikewatching</h1>
+    <header>
+      <h1>🚴🏼‍♀️ Bikewatching</h1>
+      <label id="time-filter">
+        Filter by time
+        <input id="time-slider" type=range min="-1" max="1440" value="-1">
+        <span>
+          <time id="selected-time"></time>
+          <em id="any-time">(any time)</em>
+        </span>
+      </label>
+    </header>
     <p>An interactive map of Boston and Cambridge bike lanes, BlueBike stations, and ride traffic.</p>
     <div id="map">
       <svg></svg>
+    </div>
+    <div class="legend">
+      <div style="--departure-ratio: 1" class="legend-item">More departures</div>
+      <div style="--departure-ratio: 0.5" class="legend-item">Balanced</div>
+      <div style="--departure-ratio: 0" class="legend-item">More arrivals</div>
     </div>
   </body>
 </html>
