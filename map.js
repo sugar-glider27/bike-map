@@ -181,6 +181,12 @@ map.on('load', async () => {
       .style('--departure-ratio', (d) =>
         stationFlow(d.departures / d.totalTraffic),
       );
+    // added by me
+    circles
+      .select('title')
+      .text(
+        (d) => `${d.totalTraffic} trips (${d.departures} departures, ${d.arrivals} arrivals)`,
+      );
   }
 });
 
