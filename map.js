@@ -91,7 +91,9 @@ map.on('load', async () => {
     .data(stations, (d) => d.short_name) // Use station short_name as the key
     .enter()
     .append('circle')
-    .attr('r', (d) => radiusScale(d.totalTraffic)) // Radius of the circle
+    .attr('r', (d) => 
+      d.totalTraffic === 0 ? 3 : radiusScale(d.totalTraffic)) // Radius of the circle
+    .classed('no-traffic', (d) => d.totalTraffic === 0)
     .each(function (d) {
         // Add <title> for browser tooltips
         d3.select(this)
@@ -101,7 +103,9 @@ map.on('load', async () => {
         );
     })
     .style('--departure-ratio', (d) =>
-      stationFlow(d.departures / d.totalTraffic),
+      d.totalTraffic > 0 
+        ? stationFlow(d.departures / d.totalTraffic)
+        : 0.5,
     );
 
 
@@ -177,10 +181,14 @@ map.on('load', async () => {
     circles
       .data(filteredStations, (d) => d.short_name) // Ensure D3 tracks elements correctly
       .join('circle') // Ensure the data is bound correctly
-      .attr('r', (d) => radiusScale(d.totalTraffic)) // Update circle sizes
+      .attr('r', (d) => 
+        d.totalTraffic === 0 ? 3 : radiusScale(d.totalTraffic)) // Update circle sizes
       .style('--departure-ratio', (d) =>
-        stationFlow(d.departures / d.totalTraffic),
-      );
+        d.totalTraffic > 0 
+          ? stationFlow(d.departures / d.totalTraffic)
+          : 0.5,
+      )
+      .classed('no-traffic', (d) => d.totalTraffic === 0);
     // added by me
     circles
       .select('title')

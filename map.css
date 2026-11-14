@@ -8,6 +8,10 @@ html, body {
   align-items: center; */
 }
 
+body {
+  margin-inline: auto;
+}
+
 #map svg circle, .legend-item {
   --color-departures: steelblue;
   --color-arrivals: darkorange;
@@ -81,4 +85,13 @@ header label {
   color: white;
   font-weight: bold;
   text-align: center;
+}
+
+#map svg circle.no-traffic {
+  fill: #9ca3af;
+}
+
+.legend-item.no-traffic-legend {
+  background: #9ca3af;
+  color: #1f2937;
 }
